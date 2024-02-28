@@ -1,45 +1,6 @@
-# Otimização de Interface para Acesso aos Dados Abertos da Folha de Pagamento do Tribunal de Justiça da Bahia
+# Projeto: Etapa 1 - Desenvolvimento
 
-Este projeto visa aprimorar a interface de acesso aos dados abertos da folha de pagamento do Tribunal de Justiça da Bahia, tornando a visualização e análise desses dados mais acessíveis e amigáveis para o público em geral.
-
-## Objetivos
-
-- Facilitar o acesso aos dados abertos da folha de pagamento do Tribunal de Justiça da Bahia.
-- Aprimorar a interface de usuário para tornar a visualização dos dados mais intuitiva.
-- Oferecer recursos de análise para permitir uma compreensão mais profunda dos dados.
-
-## Funcionalidades
-
-- **Visualização de Dados**: Apresentação clara e organizada dos dados da folha de pagamento.
-- **Filtros Avançados**: Possibilidade de filtrar os dados por diferentes critérios, como cargo, salário, departamento, entre outros.
-- **Gráficos e Estatísticas**: Geração de gráficos e estatísticas para análise visual dos dados.
-- **Exportação de Dados**: Opção para exportar os dados filtrados para diferentes formatos, como CSV ou Excel.
-
-## Tecnologias Utilizadas
-
-- **Frontend**: [A definir]
-- **Backend**: [Servidor Flask]
-- **Banco de Dados**: [PostgreSQL]
-
-## Instalação
-
-1. Clone o repositório: `git clone https://github.com/ArthurHenriqueSilva/Eng_SW_2.git`
-2. [Instruções específicas para configurar o ambiente e instalar dependências]
-
-## Uso
-
-1. [Instruções sobre como iniciar o servidor ou a aplicação]
-2. Acesse a interface pelo navegador utilizando o endereço: `http://localhost:[porta]`
-
-## Contribuição
-
-Contribuições são bem-vindas! Se deseja contribuir para este projeto, siga estas etapas:
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/NomeDaFeature`)
-3. Faça commit das suas mudanças (`git commit -am 'Adicione uma nova feature'`)
-4. Faça push para a branch (`git push origin feature/NomeDaFeature`)
-5. Crie um novo Pull Request
+Este documento faz parte da primeira etapa de desenvolvimento do projeto. O objetivo desta etapa é fornecer um panorama geral do projeto, incluindo a análise inicial dos dados, descoberta de requisitos, acessibilidade, usabilidade, oportunidades de melhorias, requisitos funcionais e não funcionais, histórias de usuários e protótipo.
 
 ## Autores
 
@@ -49,7 +10,27 @@ Contribuições são bem-vindas! Se deseja contribuir para este projeto, siga es
 - Sanderson Lacy Alves dos Santos
 - Vinícius Dias Valença
 
+## Objetivo do Projeto
 
----
+[Inserir o objetivo do projeto aqui.]
 
-Para mais informações, entre em contato pelo email [arthurhenrique.contactus@gmail.com].
+## Conteúdo do Documento PDF
+
+O documento PDF da primeira etapa de desenvolvimento contém os seguintes tópicos:
+
+1. **Conjunto de Dados**
+2. **Descoberta**
+3. **Acessibilidade**
+4. **Usabilidade**
+5. **Oportunidade de Melhorias**
+6. **Requisitos Funcionais**
+   - 6.1 Prioridade Alta
+   - 6.2 Prioridade Média
+7. **Requisitos Não Funcionais**
+8. **Histórias de Usuários**
+   - 8.1 Tipos de Usuário
+   - 8.2 Histórias do Usuário Cidadão Comum
+   - 8.3 Histórias do Usuário Funcionário do TJBA
+9. **Protótipo**
+
+Este documento servirá como base para o planejamento e execução das próximas etapas do projeto, fornecendo uma visão abrangente das necessidades e requisitos identificados até o momento.
