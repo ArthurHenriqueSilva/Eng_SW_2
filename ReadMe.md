@@ -10,9 +10,12 @@ Este documento faz parte da primeira etapa de desenvolvimento do projeto. O obje
 - Sanderson Lacy Alves dos Santos
 - Vinícius Dias Valença
 
-## Objetivo do Projeto
+## Objetivos do Projeto
 
-[Inserir o objetivo do projeto aqui.]
+- Facilitar o acesso aos dados abertos da folha de pagamento do Tribunal de Justiça da Bahia.
+- Aprimorar a interface de usuário para tornar a visualização dos dados mais intuitiva.
+- Oferecer recursos de análise para permitir uma compreensão mais profunda dos dados.
+
 
 ## Conteúdo do Documento PDF
 
