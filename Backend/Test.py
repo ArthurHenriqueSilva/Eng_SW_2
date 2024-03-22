@@ -5,6 +5,10 @@ class UserTests:
 
     user_default_name = "Freddie Mercury"
     user_update_name = "Freddie Mercury from Queen"
+    user_default_email = 'Freddie@Queen.com'
+    user_update_email = 'FreddieMercury@Queen.com'
+    user_default_password = '12345'
+    user_update_password = 'senha123456'
 
     @staticmethod
     def test_create_user():
@@ -51,6 +55,28 @@ class UserTests:
                 print("Test delete_user passed.")
             except AssertionError as e:
                 print("Test delete_user failed:", e)
+    
+    @staticmethod
+    def test_login():
+        with app.app_context():
+            try:
+                
+                response = app.test_client().post('/login', json={'email': UserTests.user_default_email, 'password': UserTests.user_default_password})
+                data = response.get_json()
+
+                
+                assert response.status_code == 200
+                assert data['message'] == 'Login successful'
+
+                user_data = data.get('user')
+                assert user_data is not None
+                assert 'id' in user_data
+                assert 'name' in user_data
+                assert 'email' in user_data
+
+                print("Test login passed.")
+            except AssertionError as e:
+                print("Test login failed:", e)
 
     @staticmethod
     def run_all_tests():
