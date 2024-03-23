@@ -81,6 +81,39 @@ def login():
         md.db.session.rollback()
         return jsonify(error=str(e)), 500
 
+from flask import request
+
+@app.route('/folha', methods=['GET'])
+def get_folha_route():
+    mes = request.args.get('mes')
+    ano = request.args.get('ano')
+    nome = request.args.get('nome')
+    lotacao = request.args.get('lotacao')
+    cargo = request.args.get('cargo') 
+    remuneracao = request.args.get('remuneracao') 
+    vantagens = request.args.get('vantagens') 
+    subsidio_comissao = request.args.get('subsidio_comissao') 
+    indenizacoes = request.args.get('indenizacoes') 
+    vantagens_eventuais = request.args.get('vantagens_eventuais') 
+    gratificacoes = request.args.get('gratificacoes') 
+    total_credito = request.args.get('total_credito') 
+    previdencia_publica = request.args.get('previdencia_publica') 
+    imposto_renda = request.args.get('imposto_renda') 
+    descontos = request.args.get('descontos') 
+    retencao_teto = request.args.get('retencao_teto') 
+    total_debitos = request.args.get('total_debitos') 
+    rendimento_liquido = request.args.get('rendimento_liquido') 
+    remuneracao_orgao_origem = request.args.get('remuneracao_orgao_origem') 
+    diarias = request.args.get('diarias')
+
+    folha = Control.Folha_Pagamento_Controller.get_folha(mes, ano, nome, lotacao, cargo, remuneracao, vantagens, subsidio_comissao,
+                                            indenizacoes, vantagens_eventuais, gratificacoes, total_credito, previdencia_publica,
+                                            imposto_renda, descontos, retencao_teto, total_debitos, rendimento_liquido,
+                                            remuneracao_orgao_origem, diarias)
+    if folha:
+        return jsonify({'folha': [f.serialize() for f in folha]})
+    return jsonify(Responses.folha_not_found), 404
+
 if __name__ == '__main__':
     with app.app_context():
         md.db.create_all()
