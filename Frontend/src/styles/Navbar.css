@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color:#283f58;
+  }
+  
+  .navbar img {
+    width: 120px;
+    cursor: pointer;
+  }
+  .nav-links {
+    list-style-type: none;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-right: 20px;
+  }
+
+  .nav-links li a{
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  
+  .nav-links li a:hover{
+    text-decoration: underline;
+  }
+
+  .nav-links li:last-child {
+    margin-right: 0;
+  }
+  
