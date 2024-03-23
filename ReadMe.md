@@ -17,7 +17,7 @@ Este projeto visa aprimorar a interface de acesso aos dados abertos da folha de 
 
 ## Tecnologias Utilizadas
 
-- **Frontend**: [A definir]
+- **Frontend**: [React]
 - **Backend**: [Servidor Flask]
 - **Banco de Dados**: [PostgreSQL]
 
