@@ -1,0 +1,41 @@
+.login{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content-login{
+    text-align: center;
+    background-color: #283f58;
+    padding: 30px;
+    width: 600px;
+    height: 600px;
+}
+
+.content-login h2{
+    margin: 60px;
+    font-size: 60px;
+    color: #fff;
+}
+
+.content-login form{
+    display: flex;
+    flex-direction: column;
+}
+
+.content-login form input, .content-login form button{
+    height: 50px;
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 60px;
+    font-size: 20px;
+
+}
+
+.content-login form button{
+    cursor: pointer;
+}
+.content-login form button:hover{
+    background-color: #cbcbcb;
+}

@@ -1,16 +1,15 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Slider from './components/Slider';
-import DescriptionSection from './components/Footer';
+import {Landing} from './pages/landing'
+import {LoginPage} from './pages/login'
+import './style/App.css'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div id='body'>
-      <Navbar />
-      <Slider />
-      <DescriptionSection />
-    </div>
-  );
+    <Routes>
+      <Route path='/' element={<Landing />}/>
+      <Route path='/Login' element={<LoginPage />}/>
+    </Routes>
+  )
 }
 
-export default App;
+export default App

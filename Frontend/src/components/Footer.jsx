@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/Footer.css';
+import '../style/Footer.css';
 
-const DescriptionSection = () => {
+const Footer = () => {
   return (
     <div className="footer">
       <h2>Produto Acadêmico</h2>
@@ -14,4 +14,4 @@ const DescriptionSection = () => {
   );
 }
 
-export default DescriptionSection;
+export default Footer;
