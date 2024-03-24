@@ -130,7 +130,30 @@ class Folha_Pagamento_Controller:
 
         return query.all()
 
-        
+class Consulta_Controller:
+
+    def get_busca(self,mes=None, ano=None, lotacao=None, cargo=None, nome=None, lim_inferior_remun=None,
+                 lim_superior_remun=None, id=None):
+        query = FolhaPagamento.query
+
+        if mes is not None:
+            query = query.filter(FolhaPagamento.mes == mes)
+        if ano is not None:
+            query = query.filter(FolhaPagamento.ano == ano)
+        if lotacao is not None:
+            query = query.filter(FolhaPagamento.lotacao.ilike(func.lower(f'%{lotacao}%')))
+        if cargo is not None:
+            query = query.filter(FolhaPagamento.cargo.ilike(func.lower(f'%{cargo}%')))
+        if nome is not None:
+            query = query.filter(FolhaPagamento.nome.ilike(func.lower(f'%{nome}%')))
+        if lim_inferior_remun is not None:
+            query = query.filter(FolhaPagamento.remuneracao >= lim_inferior_remun)
+        if lim_superior_remun is not None:
+            query = query.filter(FolhaPagamento.remuneracao <= lim_superior_remun)
+        if id is not None:
+            query = query.filter(FolhaPagamento.id)
+            
+        return query.all()
 
         
 

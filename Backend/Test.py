@@ -292,7 +292,40 @@ class FolhaTests:
 
         print("All folha tests completed.")
 
+class ConsultaTests:
+
+    @staticmethod
+    def test_get_consulta_by_params():
+        with app.app_context():
+            try:
+                params = {
+                    'mes': 3,
+                    'ano': 2023,
+                    'lotacao': 'Departamento X',
+                    'cargo': 'Analista',
+                    'nome': 'Michael Jackson',
+                    'lim_inferior_remun': 3000.0,
+                    'lim_superior_remun': 5000.0,
+                    'id': None
+                }
+                controller = Controllers.Consulta_Controller()
+                teste_consulta = controller.get_busca(**params)
+                assert teste_consulta is not None
+
+
+                print("Test get_consulta_by_params passed.")
+            except AssertionError as e:
+                print("Test get_consulta_by_params failed:", e)
+
+    @staticmethod
+    def run_all_tests():
+        ConsultaTests.test_get_consulta_by_params()
+
+        print("All consulta tests completed.")
+
 
 if __name__ == '__main__':
     UserTests.run_all_tests()
     FolhaTests.run_all_tests()
+    FolhaTests.test_get_folha()
+    ConsultaTests.run_all_tests()
