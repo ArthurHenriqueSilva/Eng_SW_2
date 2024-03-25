@@ -41,7 +41,7 @@ input[type='checkbox']:checked{
     margin: 1%;
 }
 
-#l1 input[type='text']{
+#l1 .text{
     width: 25%;
     background-image: url('../assets/search-icon.svg');
     background-repeat: no-repeat;

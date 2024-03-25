@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import Models as md
 import Controllers as Control
 import Responses
 
 app = Flask('app')
+CORS(app)
 env = 'test'
 # env = 'prod'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///production_database.db' if env == 'prod' else 'sqlite:///test_database.db'
@@ -114,17 +116,26 @@ def get_folha_route():
         return jsonify({'folha': [f.serialize() for f in folha]})
     return jsonify(Responses.folha_not_found), 404
 
-@app.route('/consulta', methods=['GET'])
+@app.route('/consulta', methods=['POST'])
 def consultar_dados():
+    data = request.json
+    
+    mes = data.get('mes')
+    ano = data.get('ano')
+    lotacao = data.get('lotacao')
+    cargo = data.get('cargo')
+    nome = data.get('nome')
+    lim_inferior_remun = data.get('lim_inferior_remun')
+    lim_superior_remun = data.get('lim_superior_remun')
+    id = data.get('id')
 
-    mes = int(request.args.get('mes'))
-    ano = int(request.args.get('ano'))
-    lotacao = request.args.get('lotacao')
-    cargo = request.args.get('cargo')
-    nome = request.args.get('nome')
-    lim_inferior_remun = float(request.args.get('lim_inferior_remun'))
-    lim_superior_remun = float(request.args.get('lim_superior_remun'))
-    id = request.args.get('id')
+    try:
+        mes = int(mes) if mes else None
+        ano = int(ano) if ano else None
+        lim_inferior_remun = float(lim_inferior_remun) if lim_inferior_remun else None
+        lim_superior_remun = float(lim_superior_remun) if lim_superior_remun else None
+    except ValueError:
+        return jsonify({'message': 'Parâmetros de consulta inválidos'}), 400
 
     consulta = Control.Consulta_Controller.get_busca(mes, ano, lotacao, cargo,
                                                     nome, lim_inferior_remun,
@@ -134,7 +145,7 @@ def consultar_dados():
         return jsonify(consulta)
     else:
         return jsonify({'message': 'Nenhum resultado encontrado'}), 404
-
+    
 if __name__ == '__main__':
     with app.app_context():
         md.db.create_all()
