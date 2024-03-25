@@ -114,6 +114,27 @@ def get_folha_route():
         return jsonify({'folha': [f.serialize() for f in folha]})
     return jsonify(Responses.folha_not_found), 404
 
+@app.route('/consulta', methods=['GET'])
+def consultar_dados():
+
+    mes = int(request.args.get('mes'))
+    ano = int(request.args.get('ano'))
+    lotacao = request.args.get('lotacao')
+    cargo = request.args.get('cargo')
+    nome = request.args.get('nome')
+    lim_inferior_remun = float(request.args.get('lim_inferior_remun'))
+    lim_superior_remun = float(request.args.get('lim_superior_remun'))
+    id = request.args.get('id')
+
+    consulta = Control.Consulta_Controller.get_busca(mes, ano, lotacao, cargo,
+                                                    nome, lim_inferior_remun,
+                                                    lim_superior_remun, id)
+
+    if consulta:
+        return jsonify(consulta)
+    else:
+        return jsonify({'message': 'Nenhum resultado encontrado'}), 404
+
 if __name__ == '__main__':
     with app.app_context():
         md.db.create_all()
