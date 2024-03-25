@@ -16,5 +16,7 @@ invalid_email = {'message':'Invalid email'}
 
 invalid_password = {'message':'Incorrect password'}
 
+folha_created = {'message': 'Folha created succesfully'}
+
 folha_not_found = {'message': 'Folha not found'}
 
