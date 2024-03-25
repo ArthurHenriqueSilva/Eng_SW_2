@@ -1,0 +1,49 @@
+#primeiroacesso, #notfound, #default{
+    margin: 0 auto;
+}
+
+#primeiroacesso, #notfound{
+    font-size: 160%;
+    margin-top: 15%;
+}
+
+
+#container-default{
+    background-color: #f2f5f9;
+    width: 100%;
+    padding: 1%;
+    margin: 3% auto;
+}
+
+#default{
+    width: 100%;
+    font-size: 120%;
+    margin: 2% auto;
+    text-align: center;
+    border-radius: 10px;
+    border-spacing: 0 15px;
+    border-collapse: separate;
+}
+
+
+#default caption{
+    padding-top:2%;
+    padding-bottom: 2%;
+    font-size: 140%;
+    font-weight: bold;
+}
+
+#default thead tr{
+    border-bottom: 3px solid #5c5c5c;
+}
+
+#default tbody td{
+    padding: 5%;
+    background-color: #fff;
+    filter: drop-shadow(0px 3px #828181);
+}
+
+#default tbody td:first-child{
+    padding-left: 3%;
+}
+

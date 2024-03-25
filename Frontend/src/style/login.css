@@ -3,39 +3,55 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 30%;
+    height: 50%;
 }
 
 .content-login{
     text-align: center;
+    height: 100%;
     background-color: #283f58;
-    padding: 30px;
-    width: 600px;
-    height: 600px;
+    padding: 5%;
 }
 
-.content-login h2{
-    margin: 60px;
-    font-size: 60px;
+.content-login h1{
+    width: 50%;
+    font-size: 400%;
+    font-weight: 800;
+    color: #fff;
+    margin: 5% auto;
+}
+
+.content-login h3{
+    margin: 0;
     color: #fff;
 }
-
 .content-login form{
-    display: flex;
-    flex-direction: column;
+    width: 90%;
+    height: 65%;
+    padding: 5%;
+    margin: 2% auto;    
 }
 
-.content-login form input, .content-login form button{
-    height: 50px;
-    margin: 0 auto;
-    width: 80%;
-    margin-bottom: 60px;
-    font-size: 20px;
-
+.content-login input{
+    margin: 10% 0;
+    margin-top: 8%;
+    width: 90%;
+    font-size: 120%;
+    padding: 3%;
 }
 
-.content-login form button{
+
+.content-login button{
+    width: 60%;
+    margin: 5% 0;
+    font-size: 150%;
+    padding: 1%;
     cursor: pointer;
+    color: #283f58;
+    font-weight: bolder;
 }
-.content-login form button:hover{
-    background-color: #cbcbcb;
+
+.content-login button:hover{
+    background-color: #bababa;
 }

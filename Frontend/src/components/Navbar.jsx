@@ -10,12 +10,18 @@ const Navbar = () => {
         <img src={logo} alt="Logo Site" />
       </div>
       <ul className="nav-links">
-        <li><a href="#home">Pagina Inicial</a></li>
+        <li>
+          <NavLink to='/'>Pagina Inicial </NavLink>
+        </li>
         <li>
           <NavLink to='/Login'>Login</NavLink>
-          </li>
-        <li><a href="#services">Servico Prestado</a></li>
-        <li><a href="#contact">Contato</a></li>
+        </li>
+        <li>
+          <NavLink to='/Servico'>Servico Prestado</NavLink>
+        </li>
+        <li>
+          <NavLink to='/Contato'>Contato</NavLink>
+      </li>
       </ul>
     </nav>
   );

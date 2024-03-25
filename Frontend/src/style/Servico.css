@@ -1,0 +1,39 @@
+.servico-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #283f58;
+    width: 600px;
+    height: 600px;
+    text-align: center;
+}
+
+
+.servico-container img{
+    width: 30%;
+    margin: 1% auto;
+}
+
+.servico-container h2{
+    margin: 0;
+}
+.servico-container p{
+    width: 70%;
+    margin: 5px auto;
+    padding: 2%;
+    font-size: 140%;
+    margin-bottom: 2%
+}
+
+#toconsulta{
+    background-color: #283f58;
+    color: #fff;
+    padding: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#toconsulta:hover{
+    background-color: #416790;
+}

@@ -7,7 +7,7 @@
   
 .content-info {
     text-align: center;
-    background-color: #f2eeee;
+    border: 5px solid #283f58;
     padding: 30px;
     width: 600px;
     height: 600px;
@@ -16,6 +16,7 @@
 .content-info h2{
     margin: 80px;
     font-size: 40px;
+    color: #283f58;
 }
 
 .content-info p{

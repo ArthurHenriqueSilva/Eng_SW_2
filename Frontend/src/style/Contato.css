@@ -1,0 +1,41 @@
+.contatos{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border: 5px solid #283f58;
+    width: 60%;
+}
+
+.contatos a img{
+    padding: 2%;
+    width: 5%;
+}
+.contatos h2{
+    margin: 20px;
+    font-size: 40px;
+    color: #283f58;
+}
+
+.contatos ul{
+    list-style: none;
+    margin: 5% auto;
+    text-align: center;
+    width: 80%;
+    color: #283f58;
+}
+
+.contatos ul li{
+    padding: 2%;
+}
+.contatos a{
+    font-size: 30px;
+    text-decoration: none;
+    color: #283f58;
+}
+
+.contatos a:hover{
+    color: #5d96d3;
+    text-decoration: underline;
+}

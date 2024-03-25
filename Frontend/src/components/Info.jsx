@@ -1,4 +1,6 @@
-import React from 'react';
+import {React} from 'react';
+import {NavLink }from 'react-router-dom'
+
 import '../style/Info.css';
 
 const Info = () => {
@@ -9,7 +11,10 @@ const Info = () => {
         <p>Pesquise na base de dados do Tribunal de Justiça da Bahia</p>
         <p>Utilize Filtros para navegar na folha de pagamento do TJBA.</p>
         <p>Cadastre-se e tenha acesso as consultas favoritas!</p>
-        <button id='btn'>Acessar a ferramenta</button>
+        <NavLink to='/Consulta'>
+          <button id='btn'>Acessar a ferramenta</button>
+        </NavLink>
+        
       </div>
     </div>
   );
