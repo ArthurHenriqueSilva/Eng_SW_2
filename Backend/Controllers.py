@@ -86,49 +86,51 @@ class Folha_Pagamento_Controller:
                     remuneracao_orgao_origem, diarias):
         
         query = FolhaPagamento.query
-        
-        if mes is not None:
-            query = query.filter(FolhaPagamento.mes == mes)
-        if ano is not None:
-            query = query.filter(FolhaPagamento.ano == ano)
-        if nome is not None:
-            query = query.filter(func.lower(FolhaPagamento.nome).ilike(func.lower(f'%{nome}%')))
-        if lotacao is not None:
-            query = query.filter(func.lower(FolhaPagamento.lotacao).ilike(func.lower(f'%{lotacao}%')))
-        if cargo is not None:
-            query = query.filter(func.lower(FolhaPagamento.cargo).ilike(func.lower(f'%{cargo}%')))
-        if remuneracao is not None:
-            query = query.filter(FolhaPagamento.remuneracao == remuneracao)
-        if vantagens is not None:
-            query = query.filter(FolhaPagamento.vantagens == vantagens)
-        if subsidio_comissao is not None:
-            query = query.filter(FolhaPagamento.subsidio_comissao == subsidio_comissao)
-        if indenizacoes is not None:
-            query = query.filter(FolhaPagamento.indenizacoes == indenizacoes)
-        if vantagens_eventuais is not None:
-            query = query.filter(FolhaPagamento.vantagens_eventuais == vantagens_eventuais)
-        if gratificacoes is not None:
-            query = query.filter(FolhaPagamento.gratificacoes == gratificacoes)
-        if total_credito is not None:
-            query = query.filter(FolhaPagamento.total_credito == total_credito)
-        if previdencia_publica is not None:
-            query = query.filter(FolhaPagamento.previdencia_publica == previdencia_publica)
-        if imposto_renda is not None:
-            query = query.filter(FolhaPagamento.imposto_renda == imposto_renda)
-        if descontos is not None:
-            query = query.filter(FolhaPagamento.descontos == descontos)
-        if retencao_teto is not None:
-            query = query.filter(FolhaPagamento.retencao_teto == retencao_teto)
-        if total_debitos is not None:
-            query = query.filter(FolhaPagamento.total_debitos == total_debitos)
-        if rendimento_liquido is not None:
-            query = query.filter(FolhaPagamento.rendimento_liquido == rendimento_liquido)
-        if remuneracao_orgao_origem is not None:
-            query = query.filter(FolhaPagamento.remuneracao_orgao_origem == remuneracao_orgao_origem)
-        if diarias is not None:
-            query = query.filter(FolhaPagamento.diarias == diarias)
 
-        return query.all()
+        try:        
+            if mes is not None:
+                query = query.filter(FolhaPagamento.mes == mes)
+            if ano is not None:
+                query = query.filter(FolhaPagamento.ano == ano)
+            if nome is not None:
+                query = query.filter(func.lower(FolhaPagamento.nome).ilike(func.lower(f'%{nome}%')))
+            if lotacao is not None:
+                query = query.filter(func.lower(FolhaPagamento.lotacao).ilike(func.lower(f'%{lotacao}%')))
+            if cargo is not None:
+                query = query.filter(func.lower(FolhaPagamento.cargo).ilike(func.lower(f'%{cargo}%')))
+            if remuneracao is not None:
+                query = query.filter(FolhaPagamento.remuneracao == remuneracao)
+            if vantagens is not None:
+                query = query.filter(FolhaPagamento.vantagens == vantagens)
+            if subsidio_comissao is not None:
+                query = query.filter(FolhaPagamento.subsidio_comissao == subsidio_comissao)
+            if indenizacoes is not None:
+                query = query.filter(FolhaPagamento.indenizacoes == indenizacoes)
+            if vantagens_eventuais is not None:
+                query = query.filter(FolhaPagamento.vantagens_eventuais == vantagens_eventuais)
+            if gratificacoes is not None:
+                query = query.filter(FolhaPagamento.gratificacoes == gratificacoes)
+            if total_credito is not None:
+                query = query.filter(FolhaPagamento.total_credito == total_credito)
+            if previdencia_publica is not None:
+                query = query.filter(FolhaPagamento.previdencia_publica == previdencia_publica)
+            if imposto_renda is not None:
+                query = query.filter(FolhaPagamento.imposto_renda == imposto_renda)
+            if descontos is not None:
+                query = query.filter(FolhaPagamento.descontos == descontos)
+            if retencao_teto is not None:
+                query = query.filter(FolhaPagamento.retencao_teto == retencao_teto)
+            if total_debitos is not None:
+                query = query.filter(FolhaPagamento.total_debitos == total_debitos)
+            if rendimento_liquido is not None:
+                query = query.filter(FolhaPagamento.rendimento_liquido == rendimento_liquido)
+            if remuneracao_orgao_origem is not None:
+                query = query.filter(FolhaPagamento.remuneracao_orgao_origem == remuneracao_orgao_origem)
+            if diarias is not None:
+                query = query.filter(FolhaPagamento.diarias == diarias)    
+            return query.all()            
+        except Exception as e:
+            raise e 
 
 class Consulta_Controller:
 

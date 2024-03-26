@@ -1,6 +1,7 @@
 import React from 'react';
-import '../styles/Navbar.css';
-import logo from '../assets/tjba.png'
+import { NavLink } from 'react-router-dom';
+import '../style/Navbar.css';
+import logo from '../assets/tjba.png';
 
 const Navbar = () => {
   return (
@@ -9,10 +10,18 @@ const Navbar = () => {
         <img src={logo} alt="Logo Site" />
       </div>
       <ul className="nav-links">
-        <li><a href="#home">Pagina Inicial</a></li>
-        <li><a href="#about">Sobre o Projeto</a></li>
-        <li><a href="#services">Servico Prestado</a></li>
-        <li><a href="#contact">Contato</a></li>
+        <li>
+          <NavLink to='/'>Pagina Inicial </NavLink>
+        </li>
+        <li>
+          <NavLink to='/Login'>Login</NavLink>
+        </li>
+        <li>
+          <NavLink to='/Servico'>Servico Prestado</NavLink>
+        </li>
+        <li>
+          <NavLink to='/Contato'>Contato</NavLink>
+      </li>
       </ul>
     </nav>
   );
