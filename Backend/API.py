@@ -135,6 +135,45 @@ def consultar_dados():
     else:
         return jsonify({'message': 'Nenhum resultado encontrado'}), 404
 
+
+@app.route('/favoritos/<int:id_owner>', methods=['GET'])
+def get_favoritos_route(id_owner):
+    favoritos = Control.Favorito_Controller.get_favoritos(id_owner)
+    if not favoritos: return jsonify(Responses.favoritos_not_found), 404
+    return jsonify(favoritos=[favorito.serialize() for favorito in favoritos])
+
+@app.route('/favoritos', methods=['POST'])
+def add_favorito_route():
+    try:
+        data = request.json
+        id_owner = data.get('id_owner')
+        mes = data.get('mes')
+        ano = data.get('ano')
+        tipo_servidor = data.get('tipo_servidor')
+        cargo = data.get('cargo')
+        nome_servidor = data.get('nome_servidor')
+        limite_superior_remun = data.get('limite_superior_remun')
+        limite_inferior_remun = data.get('limite_inferior_remun')
+        Control.Favorito_Controller.create_favorito(id_owner=id_owner, mes=mes, ano=ano, tipo_servidor=tipo_servidor,
+                                                              cargo=cargo, nome_servidor=nome_servidor,
+                                                              limite_superior_remun=limite_superior_remun,
+                                                              limite_inferior_remun=limite_inferior_remun)
+        return jsonify(Responses.favorito_created)
+    except Exception as e:
+        md.db.session.rollback()
+        return jsonify(error=str(e)), 500
+
+@app.route('/favoritos', methods=['DELETE'])
+def delete_favorito_route():
+    try:
+      id = request.json.get('id')
+      if Control.Favorito_Controller.delete_favorito(id): return jsonify(Responses.favorito_deleted)
+      return jsonify(Responses.favoritos_not_found), 404
+    except Exception as e:
+        md.db.session.rollback()
+        return jsonify(error=str(e)), 500
+
+
 if __name__ == '__main__':
     with app.app_context():
         md.db.create_all()

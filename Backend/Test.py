@@ -324,8 +324,118 @@ class ConsultaTests:
         print("All consulta tests completed.")
 
 
+class FavoritoTests:
+    default_user_id = None
+    favoritos_id = []
+    default_favorito_values = [
+      {
+        "default_mes": 2,
+        "default_tipo_servidor": "Desembargador",
+        "default_cargo": "DESEMBARGADOR",
+        "default_nome_servidor": "MARIA JOANA MACHADO",
+      },
+      {
+        "default_mes": 5,
+        "default_ano": 2017,
+        "default_tipo_servidor": "Juiz",
+        "default_cargo": "JUIZ SUBSTITUTO",
+
+      },
+      {
+        "default_cargo": "ADMINISTRADOR",
+        "default_nome_servidor": "CLEITON RODRIGUES OLIVEIRA",
+        "default_limite_superior_remun": 10000,
+      },
+      {
+        "default_cargo": "JUIZ DE DIREITO",
+        "default_nome_servidor": "PEDRO DE ALCANTARA FRANCO",
+      },
+      {
+
+        "default_cargo": "ANALISTA DE SISTEMAS",
+        "default_nome_servidor": "PAOLA DE SOUZA",
+        "default_limite_superior_remun": 2000,
+      },
+      {
+        "default_ano": 2017,
+        "default_tipo_servidor": "Servidor",
+        "default_cargo": "ANALISTA DE SISTEMAS",
+      },
+      {
+        "default_mes": 1,
+        "default_ano": 2015,
+        "default_tipo_servidor": "Servidor",
+        "default_cargo": "ARQUITETO",
+        "default_nome_servidor": "DAVI DE LIMA SANTOS",
+        "default_limite_superior_remun": 15000,
+        "default_limite_inferior_remun": 30000
+      }
+    ]
+    @staticmethod
+    def create_favorito_owner():
+      with app.app_context():
+        try:
+            FavoritoTests.default_user_id = Controllers.User_controller.create_user("teste", "teste@mail.com", "teste123").id
+        except Exception as e:
+            print("create_favorito_owner failed:", e)
+
+    @staticmethod
+    def delete_favorito_owner():
+        with app.app_context():
+          try:
+              Controllers.User_controller.delete_user(FavoritoTests.default_user_id)
+          except Exception as e:
+              print("delete_favorito_owner failed:", e)
+
+    @staticmethod
+    def test_create_favorito():
+      with app.app_context():
+        try:
+          for x in FavoritoTests.default_favorito_values:
+            favorito = Controllers.Favorito_Controller.create_favorito(id_owner=FavoritoTests.default_user_id,
+                                                                       mes=x.get("default_mes", None), ano=x.get("default_ano", None),
+                                                                       tipo_servidor=x.get("default_tipo_servidor", None), cargo=x.get("default_cargo", None),
+                                                                       nome_servidor=x.get("default_nome_servidor", None), limite_superior_remun=x.get("default_limite_superior_remun", None),
+                                                                       limite_inferior_remun=x.get("default_limite_inferior_remun", None))
+            assert favorito is not None
+            FavoritoTests.favoritos_id.append(favorito.id)
+            print("Test create_favorito passed.")
+        except AssertionError as e:
+          print("Test create_favorito failed:", e)
+          
+    @staticmethod
+    def test_get_favoritos():
+      with app.app_context():
+        try:
+          favoritos = Controllers.Favorito_Controller.get_favoritos(FavoritoTests.default_user_id)
+          assert favoritos is not None
+          print("Test get_favoritos passed.")
+        except AssertionError as e:
+          print("Test get_favoritos failed:", e)
+    
+    @staticmethod
+    def test_delete_favorito():
+      with app.app_context():
+        try:
+          for x in FavoritoTests.favoritos_id:
+            deleted = Controllers.Favorito_Controller.delete_favorito(x)
+            assert deleted
+            print("Test delete_favorito passed.")
+        except AssertionError as e:
+          print("Test delete_favorito failed:", e)
+    
+    @staticmethod
+    def run_all_tests():
+        FavoritoTests.create_favorito_owner()
+        FavoritoTests.test_create_favorito()
+        FavoritoTests.test_get_favoritos()
+        FavoritoTests.test_delete_favorito()
+        FavoritoTests.delete_favorito_owner()
+        print("All favorito tests completed.")
+
 if __name__ == '__main__':
     UserTests.run_all_tests()
     FolhaTests.run_all_tests()
     FolhaTests.test_get_folha()
     ConsultaTests.run_all_tests()
+    FavoritoTests.run_all_tests()

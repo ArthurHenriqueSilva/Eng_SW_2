@@ -1,4 +1,4 @@
-from Models import db, User, FolhaPagamento
+from Models import db, User, FolhaPagamento, Favorito
 from sqlalchemy import func
 
 class User_controller:
@@ -155,5 +155,36 @@ class Consulta_Controller:
             
         return query.all()
 
+class Favorito_Controller:
+    
+    @staticmethod
+    def get_favoritos(id_owner):
+        return Favorito.query.filter_by(id_owner=id_owner)
+    
+    @staticmethod
+    def create_favorito(id_owner, mes, ano, tipo_servidor,
+                        cargo, nome_servidor, 
+                        limite_superior_remun, limite_inferior_remun):
+        try:
+          new_favorito = Favorito(id_owner=id_owner, mes=mes, ano=ano,
+                                  tipo_servidor=tipo_servidor, cargo=cargo,
+                                  nome_servidor=nome_servidor, 
+                                  limite_superior_remun=limite_superior_remun, limite_inferior_remun=limite_inferior_remun)
+          db.session().add(new_favorito)
+          db.session().commit()
+          return new_favorito
+        except Exception as e:
+          db.session.rollback()
+          raise e
         
-
+    @staticmethod
+    def delete_favorito(id):
+        try:
+            favorito_to_delete = Favorito.query.get(id)
+            if not favorito_to_delete: return False
+            db.session.delete(favorito_to_delete)
+            db.session.commit()
+            return True
+        except Exception as e:
+            db.session.rollback()
+            raise e

@@ -53,3 +53,22 @@ class FolhaPagamento(db.Model):
                                  'rendimento_liquido':self.rendimento_liquido,
                                  'remuneracao_orgao_origem':self.remuneracao_orgao_origem,
                                  'diarias':self.diarias}
+
+class Favorito(db.Model):
+    __tablename__ = 'favorito'
+    
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id_owner = db.Column(db.Integer, db.ForeignKey('users.id'))
+    mes = db.Column(db.Integer)
+    ano = db.Column(db.Integer)
+    tipo_servidor = db.Column(db.String(100))
+    cargo = db.Column(db.String(100))
+    nome_servidor = db.Column(db.String(200))
+    limite_superior_remun = db.Column(db.Double)
+    limite_inferior_remun = db.Column(db.Double)
+    def serialize(self): return {'id': self.id, 'id_owner': self.id_owner, 'mes': self.mes,
+                                  'ano': self.ano, 'tipo_servidor': self.tipo_servidor,
+                                  'cargo': self.cargo, 'nome_servidor': self.nome_servidor, 
+                                  'limite_superior_remun': self.limite_superior_remun,
+                                  'limite_inferior_remun': self.limite_inferior_remun
+                                  }

@@ -18,3 +18,8 @@ invalid_password = {'message':'Incorrect password'}
 
 folha_not_found = {'message': 'Folha not found'}
 
+favoritos_not_found = {'message': 'No one favorito found'}
+
+favorito_created = {'message': 'Favorito created succesfully'}
+
+favorito_deleted = {'message': 'Favorito deleted succesfully'}
