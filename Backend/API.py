@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import Models as md
+from flask_cors import CORS
 from Controllers import Folha_Pagamento_Controller, User_controller, Consulta_Controller, Favorito_Controller
 import Responses 
 
