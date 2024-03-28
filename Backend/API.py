@@ -1,9 +1,7 @@
 from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
 import Models as md
-import Controllers as Control
-import Responses
+from Controllers import Folha_Pagamento_Controller, User_controller, Consulta_Controller, Favorito_Controller
+import Responses 
 
 app = Flask('app')
 CORS(app)
@@ -11,6 +9,28 @@ env = 'test'
 # env = 'prod'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///production_database.db' if env == 'prod' else 'sqlite:///test_database.db'
 md.db.init_app(app)
+
+class ControllerFactory:
+    def __init__(self):
+        pass
+
+    def create_user_controller(self):
+        return User_controller()
+
+    def create_folha_pagamento_controller(self):
+        return Folha_Pagamento_Controller()
+        
+    def create_consulta_controller(self):
+        return Consulta_Controller()
+        
+    def create_favorito_controller(self):
+        return Favorito_Controller()
+
+factory = ControllerFactory()
+user_controller = factory.create_user_controller()
+folha_pagamento_controller = factory.create_folha_pagamento_controller()
+consulta_controller = factory.create_consulta_controller()
+favorito_controller = factory.create_favorito_controller()
 
 @app.route('/')
 def hello_world_backend():
@@ -24,7 +44,7 @@ def create_user_route():
     password = data.get('password')
     if not name or not email or not password: return jsonify(Responses.credentials_required), 400
     try:
-        user = Control.User_controller.create_user(name, email, password)
+        user = user_controller.create_user(name, email, password)
         return jsonify(user_created={'message': 'User created successfully'})
     except Exception as e:
         md.db.session.rollback()
@@ -32,13 +52,13 @@ def create_user_route():
 
 @app.route('/users/<int:user_id>', methods=['GET'])
 def get_user_route(user_id):
-    user = Control.User_controller.get_user_by_id(user_id)
+    user = user_controller.get_user_by_id(user_id)
     if user: return jsonify({'user': user.serialize()})
     return jsonify(Responses.user_not_found), 404
 
 @app.route('/users', methods=['GET'])
 def get_all_users_route():
-    users = Control.User_controller.query_all()
+    users = user_controller.query_all()
     if not users: return jsonify(Responses.user_not_found)
     return jsonify(users=[user.serialize() for user in users])
 
@@ -49,7 +69,7 @@ def update_user_route(user_id):
     new_email = data.get('email')
     new_password = data.get('password')
     try:
-        user = Control.User_controller.update_user(user_id, new_name, new_email, new_password)
+        user = user_controller.update_user(user_id, new_name, new_email, new_password)
         if user: return jsonify(Responses.user_updated)
         return jsonify(Responses.user_not_found), 404
     except Exception as e:
@@ -59,7 +79,7 @@ def update_user_route(user_id):
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user_route(user_id):
     try:
-        deleted = Control.User_controller.delete_user(user_id)
+        deleted = user_controller.delete_user(user_id)
         if deleted: return jsonify(Responses.user_deleted)
         return jsonify(Responses.user_not_found), 404
     except Exception as e:
@@ -75,7 +95,7 @@ def login():
     if not email or not password: return jsonify(Responses.credentials_required), 400
 
     try:
-        user = Control.User_controller.login(email, password)
+        user = user_controller.login(email, password)
         if user is None: return jsonify(Responses.invalid_email), 401
         if user is False: return jsonify(Responses.invalid_password), 401
         return jsonify({'message': 'Login successful', 'user': user.serialize()})
@@ -108,7 +128,7 @@ def get_folha_route():
     remuneracao_orgao_origem = request.args.get('remuneracao_orgao_origem') 
     diarias = request.args.get('diarias')
 
-    folha = Control.Folha_Pagamento_Controller.get_folha(mes, ano, nome, lotacao, cargo, remuneracao, vantagens, subsidio_comissao,
+    folha = folha_pagamento_controller.get_folha(mes, ano, nome, lotacao, cargo, remuneracao, vantagens, subsidio_comissao,
                                             indenizacoes, vantagens_eventuais, gratificacoes, total_credito, previdencia_publica,
                                             imposto_renda, descontos, retencao_teto, total_debitos, rendimento_liquido,
                                             remuneracao_orgao_origem, diarias)
@@ -137,7 +157,7 @@ def consultar_dados():
     except ValueError:
         return jsonify({'message': 'Parâmetros de consulta inválidos'}), 400
 
-    consulta = Control.Consulta_Controller.get_busca(mes, ano, lotacao, cargo,
+    consulta = consulta_controller.get_busca(mes, ano, lotacao, cargo,
                                                     nome, lim_inferior_remun,
                                                     lim_superior_remun, id)
 
@@ -149,7 +169,7 @@ def consultar_dados():
 
 @app.route('/favoritos/<int:id_owner>', methods=['GET'])
 def get_favoritos_route(id_owner):
-    favoritos = Control.Favorito_Controller.get_favoritos(id_owner)
+    favoritos = favorito_controller.get_favoritos(id_owner)
     if not favoritos: return jsonify(Responses.favoritos_not_found), 404
     return jsonify(favoritos=[favorito.serialize() for favorito in favoritos])
 
@@ -165,7 +185,7 @@ def add_favorito_route():
         nome_servidor = data.get('nome_servidor')
         limite_superior_remun = data.get('limite_superior_remun')
         limite_inferior_remun = data.get('limite_inferior_remun')
-        Control.Favorito_Controller.create_favorito(id_owner=id_owner, mes=mes, ano=ano, tipo_servidor=tipo_servidor,
+        favorito_controller.create_favorito(id_owner=id_owner, mes=mes, ano=ano, tipo_servidor=tipo_servidor,
                                                               cargo=cargo, nome_servidor=nome_servidor,
                                                               limite_superior_remun=limite_superior_remun,
                                                               limite_inferior_remun=limite_inferior_remun)
@@ -178,7 +198,7 @@ def add_favorito_route():
 def delete_favorito_route():
     try:
       id = request.json.get('id')
-      if Control.Favorito_Controller.delete_favorito(id): return jsonify(Responses.favorito_deleted)
+      if favorito_controller.delete_favorito(id): return jsonify(Responses.favorito_deleted)
       return jsonify(Responses.favoritos_not_found), 404
     except Exception as e:
         md.db.session.rollback()
