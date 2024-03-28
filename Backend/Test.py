@@ -1,5 +1,5 @@
 import Controllers
-from API import app
+from API import app, user_controller, folha_pagamento_controller, consulta_controller, favorito_controller
 
 class UserTests:
 
@@ -17,7 +17,7 @@ class UserTests:
             try:
                 user_default_name = UserTests.user_default_names[0]
                 user_email = UserTests.generate_unique_email(user_default_name)
-                user = Controllers.User_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
+                user = user_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
                 assert user is not None
                 assert user.name == user_default_name
                 print("Test create_user passed.")
@@ -30,8 +30,8 @@ class UserTests:
             try:
                 user_default_name = UserTests.user_default_names[1]
                 user_email = UserTests.generate_unique_email(user_default_name)
-                user = Controllers.User_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
-                retrieved_user = Controllers.User_controller.get_user_by_id(user.id)
+                user = user_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
+                retrieved_user = user_controller.get_user_by_id(user.id)
                 assert retrieved_user is not None
                 assert retrieved_user.name == user_default_name
                 print("Test get_user_by_id passed.")
@@ -44,8 +44,8 @@ class UserTests:
             try:
                 user_default_name = UserTests.user_default_names[2]
                 user_email = UserTests.generate_unique_email(user_default_name)
-                user = Controllers.User_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
-                updated_user = Controllers.User_controller.update_user(user.id, UserTests.user_update_names[0])
+                user = user_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
+                updated_user = user_controller.update_user(user.id, UserTests.user_update_names[0])
                 assert updated_user is not None
                 assert updated_user.name == UserTests.user_update_names[0]
                 print("Test update_user passed.")
@@ -58,8 +58,8 @@ class UserTests:
             try:
                 user_default_name = UserTests.user_default_names[3]
                 user_email = UserTests.generate_unique_email(user_default_name)
-                user = Controllers.User_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
-                deleted = Controllers.User_controller.delete_user(user.id)
+                user = user_controller.create_user(user_default_name, user_email, UserTests.user_default_password)
+                deleted = user_controller.delete_user(user.id)
                 assert deleted
                 print("Test delete_user passed.")
             except AssertionError as e:
@@ -144,7 +144,7 @@ class FolhaTests:
                 folha_default_remuneracao_orgao_origem = FolhaTests.folha_default_remuneracao_orgao_origem[0]
                 folha_default_diarias = FolhaTests.folha_default_diarias[0]
 
-                folha = Controllers.Folha_Pagamento_Controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
+                folha = folha_pagamento_controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
                                                                 folha_default_lotacao, folha_default_cargo, folha_default_remuneracao,
                                                                 folha_default_vantagens, folha_default_subsidio_comissao,
                                                                 folha_default_indenizacoes, folha_default_vantagens_eventuais, folha_default_gratificacoes,
@@ -182,7 +182,7 @@ class FolhaTests:
                 folha_default_remuneracao_orgao_origem = FolhaTests.folha_default_remuneracao_orgao_origem[0]
                 folha_default_diarias = FolhaTests.folha_default_diarias[0]
 
-                folha = Controllers.Folha_Pagamento_Controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
+                folha = folha_pagamento_controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
                                                                 folha_default_lotacao, folha_default_cargo, folha_default_remuneracao,
                                                                 folha_default_vantagens, folha_default_subsidio_comissao,
                                                                 folha_default_indenizacoes, folha_default_vantagens_eventuais, folha_default_gratificacoes,
@@ -190,7 +190,7 @@ class FolhaTests:
                                                                 folha_default_imposto_renda, folha_default_descontos, folha_default_retencao_teto,
                                                                 folha_default_total_debitos, folha_default_rendimento_liquido,
                                                                 folha_default_remuneracao_orgao_origem, folha_default_diarias)
-                retrieved_folha = Controllers.Folha_Pagamento_Controller.get_folha(folha.mes, folha.ano, folha.nome, folha.lotacao, folha.cargo,
+                retrieved_folha = folha_pagamento_controller.get_folha(folha.mes, folha.ano, folha.nome, folha.lotacao, folha.cargo,
                                                                                    folha.remuneracao, folha.vantagens, folha.subsidio_comissao,
                                                                                    folha.indenizacoes, folha.vantagens_eventuais, folha.gratificacoes,
                                                                                    folha.total_credito, folha.previdencia_publica,
@@ -226,7 +226,7 @@ class FolhaTests:
                 folha_default_remuneracao_orgao_origem = FolhaTests.folha_default_remuneracao_orgao_origem[1]
                 folha_default_diarias = FolhaTests.folha_default_diarias[1]
 
-                folha = Controllers.Folha_Pagamento_Controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
+                folha = folha_pagamento_controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
                                                                 folha_default_lotacao, folha_default_cargo, folha_default_remuneracao,
                                                                 folha_default_vantagens, folha_default_subsidio_comissao,
                                                                 folha_default_indenizacoes, folha_default_vantagens_eventuais, folha_default_gratificacoes,
@@ -234,7 +234,7 @@ class FolhaTests:
                                                                 folha_default_imposto_renda, folha_default_descontos, folha_default_retencao_teto,
                                                                 folha_default_total_debitos, folha_default_rendimento_liquido,
                                                                 folha_default_remuneracao_orgao_origem, folha_default_diarias)
-                retrieved_folha = Controllers.Folha_Pagamento_Controller.get_folha(None, None,folha.nome, None, None,
+                retrieved_folha = folha_pagamento_controller.get_folha(None, None,folha.nome, None, None,
                                                                                    None, None, None, None, None, None, None,
                                                                                    None, None, None, None, None, None, None, None)
                 assert retrieved_folha is not None
@@ -267,7 +267,7 @@ class FolhaTests:
                 folha_default_remuneracao_orgao_origem = FolhaTests.folha_default_remuneracao_orgao_origem[2]
                 folha_default_diarias = FolhaTests.folha_default_diarias[2]
 
-                folha = Controllers.Folha_Pagamento_Controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
+                folha = folha_pagamento_controller.create_folha(folha_default_mes, folha_default_ano, folha_default_nome,
                                                                 folha_default_lotacao, folha_default_cargo, folha_default_remuneracao,
                                                                 folha_default_vantagens, folha_default_subsidio_comissao,
                                                                 folha_default_indenizacoes, folha_default_vantagens_eventuais, folha_default_gratificacoes,
@@ -275,7 +275,7 @@ class FolhaTests:
                                                                 folha_default_imposto_renda, folha_default_descontos, folha_default_retencao_teto,
                                                                 folha_default_total_debitos, folha_default_rendimento_liquido,
                                                                 folha_default_remuneracao_orgao_origem, folha_default_diarias)
-                retrieved_folha = Controllers.Folha_Pagamento_Controller.get_folha(folha.mes, folha.ano, None, None, None,
+                retrieved_folha = folha_pagamento_controller.get_folha(folha.mes, folha.ano, None, None, None,
                                                                                    None, None, None, None, None, None, None,
                                                                                    None, None, None, None, None, None, None, None)
                 assert retrieved_folha is not None
@@ -308,8 +308,7 @@ class ConsultaTests:
                     'lim_superior_remun': 5000.0,
                     'id': None
                 }
-                controller = Controllers.Consulta_Controller()
-                teste_consulta = controller.get_busca(**params)
+                teste_consulta = consulta_controller.get_busca(**params)
                 assert teste_consulta is not None
 
 
@@ -375,7 +374,7 @@ class FavoritoTests:
     def create_favorito_owner():
       with app.app_context():
         try:
-            FavoritoTests.default_user_id = Controllers.User_controller.create_user("teste", "teste@mail.com", "teste123").id
+            FavoritoTests.default_user_id = user_controller.create_user("teste", "teste@mail.com", "teste123").id
         except Exception as e:
             print("create_favorito_owner failed:", e)
 
@@ -383,7 +382,7 @@ class FavoritoTests:
     def delete_favorito_owner():
         with app.app_context():
           try:
-              Controllers.User_controller.delete_user(FavoritoTests.default_user_id)
+              user_controller.delete_user(FavoritoTests.default_user_id)
           except Exception as e:
               print("delete_favorito_owner failed:", e)
 
@@ -392,7 +391,7 @@ class FavoritoTests:
       with app.app_context():
         try:
           for x in FavoritoTests.default_favorito_values:
-            favorito = Controllers.Favorito_Controller.create_favorito(id_owner=FavoritoTests.default_user_id,
+            favorito = favorito_controller.create_favorito(id_owner=FavoritoTests.default_user_id,
                                                                        mes=x.get("default_mes", None), ano=x.get("default_ano", None),
                                                                        tipo_servidor=x.get("default_tipo_servidor", None), cargo=x.get("default_cargo", None),
                                                                        nome_servidor=x.get("default_nome_servidor", None), limite_superior_remun=x.get("default_limite_superior_remun", None),
@@ -407,7 +406,7 @@ class FavoritoTests:
     def test_get_favoritos():
       with app.app_context():
         try:
-          favoritos = Controllers.Favorito_Controller.get_favoritos(FavoritoTests.default_user_id)
+          favoritos = favorito_controller.get_favoritos(FavoritoTests.default_user_id)
           assert favoritos is not None
           print("Test get_favoritos passed.")
         except AssertionError as e:
@@ -418,7 +417,7 @@ class FavoritoTests:
       with app.app_context():
         try:
           for x in FavoritoTests.favoritos_id:
-            deleted = Controllers.Favorito_Controller.delete_favorito(x)
+            deleted = favorito_controller.delete_favorito(x)
             assert deleted
             print("Test delete_favorito passed.")
         except AssertionError as e:
@@ -436,6 +435,5 @@ class FavoritoTests:
 if __name__ == '__main__':
     UserTests.run_all_tests()
     FolhaTests.run_all_tests()
-    FolhaTests.test_get_folha()
     ConsultaTests.run_all_tests()
     FavoritoTests.run_all_tests()
